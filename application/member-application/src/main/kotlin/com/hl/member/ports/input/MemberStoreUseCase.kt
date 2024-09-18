@@ -5,5 +5,5 @@ import com.hl.member.model.Member
 interface MemberStoreUseCase {
     fun createMember(member: Member)
 
-    fun updateMember(member: Member)
+    fun updateMember(member: Member): Member
 }

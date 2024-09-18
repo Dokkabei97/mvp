@@ -1,22 +1,19 @@
-package com.hl.member.ports.input
+package com.hl.member.input.dto
 
 import com.hl.member.model.Gender
-import jakarta.validation.constraints.Email
-import jakarta.validation.constraints.NotBlank
+import com.hl.member.model.Member
 import java.time.LocalDate
 
-sealed class MemberCommand(
-    @field:NotBlank
+sealed class MemberRequest(
     open val name: String,
     open val nickname: String,
-    @field:Email
     open val email: String,
     open val password: String,
     open val gender: Gender,
     open val birthDate: LocalDate,
     open val location: String,
 ) {
-    data class CreateMember(
+    data class CreateMemberRequest(
         override val name: String,
         override val nickname: String,
         override val email: String,
@@ -24,9 +21,21 @@ sealed class MemberCommand(
         override val gender: Gender,
         override val birthDate: LocalDate,
         override val location: String,
-    ) : MemberCommand(name, nickname, email, password, gender, birthDate, location)
+    ) : MemberRequest(name, nickname, email, password, gender, birthDate, location) {
+        fun toMember() =
+            Member(
+                name = name,
+                nickname = nickname,
+                email = email,
+                password = password,
+                gender = gender,
+                birthDate = birthDate,
+                location = location,
+            )
+    }
 
-    data class UpdateMember(
+    data class UpdateMemberRequest(
+        val id: Long,
         val name: String?,
         val nickname: String?,
         val email: String?,

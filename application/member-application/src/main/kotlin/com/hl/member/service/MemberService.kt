@@ -17,7 +17,5 @@ class MemberService(
         memberStorePort.createMember(member)
     }
 
-    override fun updateMember(member: Member) {
-        memberStorePort.updateMember(member)
-    }
+    override fun updateMember(member: Member) = memberStorePort.updateMember(member)
 }
