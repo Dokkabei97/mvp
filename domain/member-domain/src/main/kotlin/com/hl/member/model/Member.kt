@@ -1,3 +1,14 @@
-package com.hl.member.entity
+package com.hl.member.model
 
-data class Member()
+import java.time.LocalDate
+
+class Member(
+    val id: Long,
+    val name: String,
+    val nickname: String,
+    val email: String,
+    val password: String,
+    val gender: Gender,
+    val birthDate: LocalDate,
+    val location: String,
+)

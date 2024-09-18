@@ -1,4 +1,4 @@
-package com.hl.core.domain
+package com.hl.member.model
 
 enum class Gender {
     M,
