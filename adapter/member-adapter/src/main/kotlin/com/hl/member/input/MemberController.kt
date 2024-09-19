@@ -1,7 +1,7 @@
 package com.hl.member.input
 
 import com.hl.core.response.CommonResponse
-import com.hl.member.command.MemberCommand
+import com.hl.member.input.dto.MemberRequest
 import com.hl.member.model.Member
 import com.hl.member.ports.input.MemberReaderUseCase
 import com.hl.member.ports.input.MemberStoreUseCase
@@ -19,17 +19,17 @@ class MemberController(
 ) {
     @PostMapping
     fun createMember(
-        @RequestBody request: MemberCommand.CreateMemberCommand,
+        @RequestBody request: MemberRequest,
     ) {
-        memberStoreUseCase.createMember(request.toMember())
+        memberStoreUseCase.createMember(request.toCreateMemberCommand())
     }
 
     @PutMapping
     fun updateMember(
-        @RequestBody request: MemberCommand.UpdateMemberCommand,
+        @RequestBody request: MemberRequest.UpdateMemberRequest,
     ): CommonResponse<Member> {
         // FIXME: memberStoreUseCase.updateMember(request.toMember())
-        val member = memberStoreUseCase.updateMember(request.toMember())
+        val member = memberStoreUseCase.updateMember(request.toUpdateMemberCommand())
         return CommonResponse.success(member)
     }
 }

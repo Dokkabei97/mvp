@@ -3,26 +3,14 @@ package com.hl.member.output.domain
 import com.hl.member.model.Gender
 import com.hl.member.model.Member
 import com.hl.persistence.AbstractEntity
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.Table
 import java.time.LocalDate
 
-@Entity
-@Table(name = "members")
 class MemberEntity(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long?,
     var name: String,
     var nickname: String,
     var email: String,
     var password: String,
-    @Enumerated(EnumType.STRING)
     var gender: Gender,
     var birthDate: LocalDate,
     var location: String,
