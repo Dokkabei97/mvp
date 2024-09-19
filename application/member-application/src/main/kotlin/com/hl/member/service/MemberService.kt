@@ -1,5 +1,6 @@
 package com.hl.member.service
 
+import com.hl.member.command.MemberCommand
 import com.hl.member.model.Member
 import com.hl.member.ports.input.MemberReaderUseCase
 import com.hl.member.ports.input.MemberStoreUseCase
@@ -13,9 +14,9 @@ class MemberService(
     val memberStorePort: MemberStorePort,
 ) : MemberReaderUseCase,
     MemberStoreUseCase {
-    override fun createMember(member: Member) {
-        memberStorePort.createMember(member)
+    override fun createMember(command: MemberCommand.CreateMemberCommand) {
+        memberStorePort.createMember(command)
     }
 
-    override fun updateMember(member: Member) = memberStorePort.updateMember(member)
+    override fun updateMember(command: MemberCommand.UpdateMemberCommand): Member = memberStorePort.updateMember(command)
 }

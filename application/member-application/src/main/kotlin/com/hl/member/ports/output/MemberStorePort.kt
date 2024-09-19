@@ -1,9 +1,10 @@
 package com.hl.member.ports.output
 
+import com.hl.member.command.MemberCommand
 import com.hl.member.model.Member
 
 interface MemberStorePort {
-    fun createMember(member: Member)
+    fun createMember(command: MemberCommand.CreateMemberCommand)
 
-    fun updateMember(member: Member): Member
+    fun updateMember(command: MemberCommand.UpdateMemberCommand): Member
 }

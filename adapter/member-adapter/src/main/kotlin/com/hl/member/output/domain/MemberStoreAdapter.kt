@@ -1,30 +1,28 @@
 package com.hl.member.output.domain
 
+import com.hl.member.command.MemberCommand
 import com.hl.member.converter.toEntity
 import com.hl.member.model.Member
 import com.hl.member.output.infrastructure.MemberRepository
 import com.hl.member.ports.output.MemberStorePort
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
+import kotlin.jvm.optionals.getOrNull
 
 @Component
 @Transactional
 class MemberStoreAdapter(
     val memberRepository: MemberRepository,
 ) : MemberStorePort {
-    override fun createMember(member: Member) {
-        memberRepository.save(member.toEntity())
+    override fun createMember(command: MemberCommand.CreateMemberCommand) {
+        memberRepository.save(command.toEntity())
     }
 
-    override fun updateMember(member: Member): Member =
-        // TODO: null값을 통해 동적 업데이트를 구현해야 함
-        member
-            .toEntity()
-            .apply {
-                updateNickname(member.nickname)
-                updatePassword(member.password)
-                updateGender(member.gender)
-                updateBirthDate(member.birthDate)
-                updateLocation(member.location)
-            }.toDomain()
+    // JPA 더티체크로 인해 JPA에 의존성이 강해져 업데이트 로직이 adapter단에 구현되어 있음
+    // TODO: JPA -> Exposed로 변경
+    override fun updateMember(command: MemberCommand.UpdateMemberCommand): Member {
+        val member = memberRepository.findById(command.id).getOrNull()
+
+        return member!!.toDomain()
+    }
 }
