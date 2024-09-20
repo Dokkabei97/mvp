@@ -6,9 +6,9 @@ CREATE TABLE members
   nickname   VARCHAR(50) UNIQUE  NOT NULL,
   password   VARCHAR(255)        NOT NULL,
   email      VARCHAR(100) UNIQUE NOT NULL,
-  gender     CHAR(1) CHECK (gender IN ('M', 'F')), -- 성별: M(남성), F(여성)
-  birth_date DATE,                                 -- 출생일
-  location   VARCHAR(100),                         -- 회원 위치 정보
+  gender     VARCHAR(6) CHECK (gender IN ('MALE', 'FEMALE')), -- 성별: MALE(남성), FEMALE(여성)
+  birth_date DATE                NOT NULL,                    -- 출생일
+  location   VARCHAR(100)        NOT NULL,                    -- 회원 위치 정보
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

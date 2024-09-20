@@ -7,5 +7,7 @@ import org.springframework.stereotype.Repository
 interface MemberRepository {
     fun save(entity: MemberEntity)
 
+    fun update(entity: MemberEntity): MemberEntity
+
     fun findById(id: Long): MemberEntity?
 }
