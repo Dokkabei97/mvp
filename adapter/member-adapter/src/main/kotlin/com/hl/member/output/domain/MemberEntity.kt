@@ -2,7 +2,6 @@ package com.hl.member.output.domain
 
 import com.hl.member.model.Gender
 import com.hl.member.model.Member
-import com.hl.persistence.AbstractEntity
 import java.time.LocalDate
 
 class MemberEntity(
@@ -14,7 +13,7 @@ class MemberEntity(
     var gender: Gender,
     var birthDate: LocalDate,
     var location: String,
-) : AbstractEntity() {
+) {
     companion object {
         private const val EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$"
         private const val NICKNAME_REGEX = "^[가-힣a-zA-Z0-9]{2,10}$"

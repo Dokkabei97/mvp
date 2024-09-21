@@ -18,7 +18,7 @@ class MemberRepositoryImpl : MemberRepository {
                 it[nickname] = entity.nickname
                 it[email] = entity.email
                 it[password] = entity.password
-                it[gender] = entity.gender.name
+                it[gender] = entity.gender
                 it[birthDate] = entity.birthDate.toKotlinLocalDate()
                 it[location] = entity.location
             }
@@ -27,12 +27,12 @@ class MemberRepositoryImpl : MemberRepository {
 
     override fun update(entity: MemberEntity): MemberEntity {
         transaction {
-            Members.update({ Members.id.eq(entity.id!!.toInt()) }) {
+            Members.update({ Members.id.eq(entity.id!!) }) {
                 it[name] = entity.name
                 it[nickname] = entity.nickname
                 it[email] = entity.email
                 it[password] = entity.password
-                it[gender] = entity.gender.name
+                it[gender] = entity.gender
                 it[birthDate] = entity.birthDate.toKotlinLocalDate()
                 it[location] = entity.location
             }
@@ -53,12 +53,12 @@ class MemberRepositoryImpl : MemberRepository {
                     Members.birthDate,
                     Members.location,
                 ).where {
-                    Members.id.eq(id.toInt())
+                    Members.id.eq(id)
                 }.singleOrNull()
 
         return member!!.let {
             MemberEntity(
-                id = it[Members.id].toLong(),
+                id = it[Members.id].value,
                 name = it[Members.name],
                 nickname = it[Members.nickname],
                 email = it[Members.email],
